@@ -541,37 +541,13 @@ window.openModuleDetails = function(moduleId) {
     topicsList.appendChild(li);
   });
   
-  // Setup Interactive Sandbox Playground display
-  const sandboxStats = document.getElementById("sandbox-stats");
-  const sandboxSQL = document.getElementById("sandbox-sql");
-  const sandboxCleaning = document.getElementById("sandbox-cleaning");
-  const sandboxGeneric = document.getElementById("sandbox-generic");
-  
-  sandboxStats.style.display = "none";
-  sandboxSQL.style.display = "none";
-  sandboxCleaning.style.display = "none";
-  sandboxGeneric.style.display = "none";
-  
-  // Invoke sandbox initializers from HQModules
-  if (mod.playgroundType === "stats" && window.sandboxInitializers["stats"]) {
-    sandboxStats.style.display = "block";
-    window.sandboxInitializers["stats"]();
-  } else if (mod.playgroundType === "sql" && window.sandboxInitializers["sql"]) {
-    sandboxSQL.style.display = "block";
-    window.sandboxInitializers["sql"]();
-  } else if (mod.playgroundType === "cleaning" && window.sandboxInitializers["cleaning"]) {
-    sandboxCleaning.style.display = "block";
-    window.sandboxInitializers["cleaning"]();
-  } else {
-    sandboxGeneric.style.display = "block";
-  }
-  
   // Open Full-Page Module View
   document.getElementById("module-drawer-overlay").classList.add("active");
   document.getElementById("module-drawer").classList.add("open");
   // Prevent body scroll
   document.body.style.overflow = "hidden";
 };
+
 
 window.closeDrawer = function() {
   document.getElementById("module-drawer-overlay").classList.remove("active");

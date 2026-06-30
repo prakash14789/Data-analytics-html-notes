@@ -2290,29 +2290,17 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(-2px);
 }
 
-/* Two-column body */
-.module-page-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Single-column body (sandbox removed) */
+.module-page-body-single {
   flex: 1;
-  overflow: hidden;
-}
-
-.module-page-left {
-  padding: 2rem;
   overflow-y: auto;
-  border-right: 1px solid var(--bg-card-border);
+  padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-.module-page-right {
-  padding: 2rem;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .module-info-card {
