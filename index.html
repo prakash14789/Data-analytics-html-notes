@@ -384,157 +384,153 @@
     </main>
   </div>
   
-  <!-- Slide-out Drawer Panel for Module Details -->
-  <div class="drawer-overlay" id="module-drawer-overlay"></div>
-  <aside class="module-drawer" id="module-drawer">
-    <div class="drawer-header">
-      <div class="drawer-title-wrapper">
-        <span class="drawer-module-num" id="drawer-module-number">Module 1</span>
-        <h3 id="drawer-module-title">Statistics & Probability</h3>
+  <!-- Full-Page Module Detail Modal -->
+  <div class="module-page-overlay" id="module-drawer-overlay"></div>
+  <div class="module-page" id="module-drawer">
+
+    <!-- Fixed Top Bar -->
+    <div class="module-page-topbar">
+      <div class="module-page-topbar-left">
+        <button class="module-back-btn" id="drawer-close-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Back to Modules
+        </button>
+      </div>
+      <div class="module-page-topbar-center">
+        <span class="module-page-badge" id="drawer-module-number">Module 1</span>
+        <h2 id="drawer-module-title">Statistics &amp; Probability</h2>
         <span class="badge" id="drawer-module-weeks">Week 1</span>
       </div>
-      <button class="drawer-close-btn" id="drawer-close-btn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-    </div>
-    
-    <div class="drawer-body">
-      <!-- Section 1: Why This Module -->
-      <div class="drawer-section card accent-border">
-        <h4>Why This Module?</h4>
-        <p id="drawer-module-why">Numbers without statistics are just noise...</p>
-      </div>
-      
-      <!-- Section 2: Detailed Syllabus Checklist -->
-      <div class="drawer-section">
-        <h4>Topics & Syllabus Covered</h4>
-        <p class="card-description">Master these core topics throughout this module.</p>
-        <ul class="drawer-checklist" id="drawer-topics-list">
-          <!-- Populated by JS -->
-        </ul>
-      </div>
-      
-      <!-- Section 3: Practice task -->
-      <div class="drawer-section card dark-accent-bg">
-        <h4>Practice Tasks & Projects</h4>
-        <p id="drawer-module-project">Run a real A/B test on marketing data...</p>
-      </div>
-      
-      <!-- Section 4: Interactive Sandbox Playground (The Climax Feature) -->
-      <div class="drawer-section">
-        <div class="sandbox-title-row">
-          <h4>Interactive Practice Sandbox</h4>
-          <span class="badge badge-accent">Interactive Demo</span>
-        </div>
-        <p class="card-description">Test your learning immediately with this custom interactive tool.</p>
-        
-        <!-- Module 1: A/B Testing Significance Calculator -->
-        <div id="sandbox-stats" class="sandbox-container" style="display: none;">
-          <div class="sandbox-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Campaign A Visitors</label>
-                <input type="number" id="ab-visitors-a" value="1000" min="1">
-              </div>
-              <div class="form-group">
-                <label>Campaign A Conversions</label>
-                <input type="number" id="ab-conv-a" value="50" min="0">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Campaign B Visitors</label>
-                <input type="number" id="ab-visitors-b" value="1000" min="1">
-              </div>
-              <div class="form-group">
-                <label>Campaign B Conversions</label>
-                <input type="number" id="ab-conv-b" value="75" min="0">
-              </div>
-            </div>
-            <button class="btn btn-primary btn-sm" id="ab-calc-btn" style="width: 100%; margin-top: 1rem;">Run Hypothesis Test</button>
-          </div>
-          
-          <div class="sandbox-results" id="ab-results-box" style="display: none;">
-            <h5>Analysis Results</h5>
-            <div class="ab-metrics-row">
-              <div class="ab-metric-col">
-                <span>Conv. Rate A</span>
-                <strong id="ab-rate-a">5.0%</strong>
-              </div>
-              <div class="ab-metric-col">
-                <span>Conv. Rate B</span>
-                <strong id="ab-rate-b">7.5%</strong>
-              </div>
-              <div class="ab-metric-col">
-                <span>P-value</span>
-                <strong id="ab-p-val">0.023</strong>
-              </div>
-            </div>
-            <div class="ab-conclusion" id="ab-conclusion-text">
-              Campaign B is statistically significant! (p &lt; 0.05). Reject the null hypothesis.
-            </div>
-          </div>
-        </div>
-        
-        <!-- Module 3: SQL Query Playground -->
-        <div id="sandbox-sql" class="sandbox-container" style="display: none;">
-          <div class="sandbox-desc">
-            <p>Run query operations on a mock database: <code>sales_table</code></p>
-            <p>Columns: <code>id</code>, <code>product</code>, <code>category</code>, <code>revenue</code>, <code>region</code>, <code>repeat_customer</code> (true/false)</p>
-          </div>
-          <div class="sql-playground-area">
-            <div class="sql-input-row">
-              <textarea id="sql-query-input" rows="3">SELECT category, SUM(revenue) AS total_revenue&#10;FROM sales_table&#10;GROUP BY category&#10;ORDER BY total_revenue DESC</textarea>
-            </div>
-            <div class="sql-actions-row">
-              <button class="btn btn-outline btn-sm" id="sql-reset-btn">Reset Query</button>
-              <button class="btn btn-primary btn-sm" id="sql-run-btn">Execute Query</button>
-            </div>
-            
-            <div class="sql-results-area">
-              <h5>Query Output</h5>
-              <div class="sql-table-wrapper" id="sql-results-table-container">
-                <!-- Rendered dynamically -->
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Module 5: Data Cleaning Sandbox -->
-        <div id="sandbox-cleaning" class="sandbox-container" style="display: none;">
-          <p class="card-description">Clean this "dirty" user enrollment dataset containing duplicates, outliers, and missing values.</p>
-          
-          <div class="cleaning-dashboard">
-            <div class="cleaning-controls">
-              <button class="btn btn-outline btn-xs" id="clean-dups-btn">Remove Duplicates</button>
-              <button class="btn btn-outline btn-xs" id="clean-nulls-btn">Impute Null Ages (Mean)</button>
-              <button class="btn btn-outline btn-xs" id="clean-outliers-btn">Filter Outlier Salaries</button>
-              <button class="btn btn-outline btn-xs" id="clean-reset-btn">Reset Dataset</button>
-            </div>
-            
-            <div class="cleaning-stats-bar">
-              <span>Rows: <strong id="clean-row-count">8</strong></span>
-              <span>Duplicate Rows: <strong id="clean-dup-count">2</strong></span>
-              <span>Missing Ages: <strong id="clean-null-count">1</strong></span>
-              <span>Outlier Salaries: <strong id="clean-outlier-count">1</strong></span>
-            </div>
-            
-            <div class="sql-table-wrapper" style="max-height: 180px;">
-              <table class="sandbox-table" id="cleaning-table">
-                <!-- Content loaded by JS -->
-              </table>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Simple fallback for modules without specific interactive tool -->
-        <div id="sandbox-generic" class="sandbox-container">
-          <p class="generic-sandbox-text">Use the **Study Notepad** tab to write notes and log code scripts for this module. You can also test your knowledge in the **Recall & Quizzes** tab!</p>
-        </div>
-        
+      <div class="module-page-topbar-right">
+        <!-- spacer -->
       </div>
     </div>
-  </aside>
+
+    <!-- Scrollable Body split into two columns -->
+    <div class="module-page-body">
+
+      <!-- LEFT COLUMN: Meta info + topics + project -->
+      <div class="module-page-left">
+
+        <div class="module-info-card accent-border">
+          <div class="module-info-label">Why This Module?</div>
+          <p id="drawer-module-why">Loading...</p>
+        </div>
+
+        <div class="module-info-card">
+          <div class="module-info-label">Daily Topics &amp; Lessons</div>
+          <p class="card-description" style="margin-bottom:1rem;">Click any day to expand the full lesson content.</p>
+          <ul class="drawer-checklist" id="drawer-topics-list">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+
+        <div class="module-info-card dark-accent-bg">
+          <div class="module-info-label">Practice Project</div>
+          <p id="drawer-module-project">Loading...</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Interactive Sandbox -->
+      <div class="module-page-right">
+
+        <div class="module-info-card">
+          <div class="sandbox-title-row">
+            <div class="module-info-label">Interactive Practice Sandbox</div>
+            <span class="badge badge-accent">Live Demo</span>
+          </div>
+          <p class="card-description" style="margin-bottom:1rem;">Test your learning immediately with this custom interactive tool.</p>
+
+          <!-- Module 1: A/B Testing Significance Calculator -->
+          <div id="sandbox-stats" class="sandbox-container" style="display: none;">
+            <div class="sandbox-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Campaign A Visitors</label>
+                  <input type="number" id="ab-visitors-a" value="1000" min="1">
+                </div>
+                <div class="form-group">
+                  <label>Campaign A Conversions</label>
+                  <input type="number" id="ab-conv-a" value="50" min="0">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Campaign B Visitors</label>
+                  <input type="number" id="ab-visitors-b" value="1000" min="1">
+                </div>
+                <div class="form-group">
+                  <label>Campaign B Conversions</label>
+                  <input type="number" id="ab-conv-b" value="75" min="0">
+                </div>
+              </div>
+              <button class="btn btn-primary" id="ab-calc-btn" style="width:100%;margin-top:1rem;">Run Hypothesis Test</button>
+            </div>
+            <div class="sandbox-results" id="ab-results-box" style="display: none;">
+              <h5>Analysis Results</h5>
+              <div class="ab-metrics-row">
+                <div class="ab-metric-col"><span>Rate A</span><strong id="ab-rate-a">5.0%</strong></div>
+                <div class="ab-metric-col"><span>Rate B</span><strong id="ab-rate-b">7.5%</strong></div>
+                <div class="ab-metric-col"><span>Lift</span><strong id="ab-lift">+50%</strong></div>
+                <div class="ab-metric-col"><span>P-value</span><strong id="ab-p-val">0.023</strong></div>
+              </div>
+              <div class="ab-conclusion" id="ab-conclusion-text">Result will appear here.</div>
+            </div>
+          </div>
+
+          <!-- Module 3: SQL Query Playground -->
+          <div id="sandbox-sql" class="sandbox-container" style="display: none;">
+            <div class="sandbox-desc">
+              <p>Run queries on mock table: <code>sales_table</code></p>
+              <p>Columns: <code>id</code>, <code>product</code>, <code>category</code>, <code>revenue</code>, <code>region</code>, <code>repeat_customer</code></p>
+            </div>
+            <div class="sql-playground-area">
+              <div class="sql-input-row">
+                <textarea id="sql-query-input" rows="4">SELECT category, SUM(revenue) AS total_revenue&#10;FROM sales_table&#10;GROUP BY category&#10;ORDER BY total_revenue DESC</textarea>
+              </div>
+              <div class="sql-actions-row">
+                <button class="btn btn-outline btn-sm" id="sql-reset-btn">Reset</button>
+                <button class="btn btn-primary btn-sm" id="sql-run-btn">Execute Query</button>
+              </div>
+              <div class="sql-results-area">
+                <h5>Query Output</h5>
+                <div class="sql-table-wrapper" id="sql-results-table-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 5: Data Cleaning Sandbox -->
+          <div id="sandbox-cleaning" class="sandbox-container" style="display: none;">
+            <p class="card-description" style="margin-bottom:1rem;">Clean this dirty dataset with duplicates, outliers, and missing values.</p>
+            <div class="cleaning-dashboard">
+              <div class="cleaning-controls">
+                <button class="btn btn-outline btn-xs" id="clean-dups-btn">Remove Duplicates</button>
+                <button class="btn btn-outline btn-xs" id="clean-nulls-btn">Impute Null Ages</button>
+                <button class="btn btn-outline btn-xs" id="clean-outliers-btn">Filter Outliers</button>
+                <button class="btn btn-outline btn-xs" id="clean-reset-btn">Reset Dataset</button>
+              </div>
+              <div class="cleaning-stats-bar">
+                <span>Rows: <strong id="clean-row-count">8</strong></span>
+                <span>Duplicates: <strong id="clean-dup-count">2</strong></span>
+                <span>Missing Ages: <strong id="clean-null-count">1</strong></span>
+                <span>Outliers: <strong id="clean-outlier-count">1</strong></span>
+              </div>
+              <div class="sql-table-wrapper" style="max-height:220px;">
+                <table class="sandbox-table" id="cleaning-table"></table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Generic fallback -->
+          <div id="sandbox-generic" class="sandbox-container">
+            <p class="generic-sandbox-text">Use the Study Notepad tab to write notes and code snippets for this module. Practice your knowledge in the Recall &amp; Quizzes tab!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
   
   <!-- Data Registries -->
   <script src="js/quotes.js"></script>

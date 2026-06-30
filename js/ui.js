@@ -566,14 +566,17 @@ window.openModuleDetails = function(moduleId) {
     sandboxGeneric.style.display = "block";
   }
   
-  // Open Drawer UI
+  // Open Full-Page Module View
   document.getElementById("module-drawer-overlay").classList.add("active");
   document.getElementById("module-drawer").classList.add("open");
+  // Prevent body scroll
+  document.body.style.overflow = "hidden";
 };
 
 window.closeDrawer = function() {
   document.getElementById("module-drawer-overlay").classList.remove("active");
   document.getElementById("module-drawer").classList.remove("open");
+  document.body.style.overflow = "";
 };
 
 // Recall Center (Flashcards & Quizzes)
