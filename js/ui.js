@@ -836,3 +836,53 @@ window.renderMarkdownNotes = function(markdownText) {
   
   preview.innerHTML = window.renderMarkdownToHTMLString(markdownText);
 };
+
+window.getLessonContent = function(dayId, dayTopic) {
+  if (window.dailyLessonsContent && window.dailyLessonsContent[dayId]) {
+    return window.dailyLessonsContent[dayId];
+  }
+  // Fallback for Weeks 2-8
+  return `### ${dayTopic}
+
+This lesson covers the core concept of **${dayTopic}**. 
+
+**Key Objectives:**
+- Understand the definition and core principles of this topic.
+- Implement practice exercises in your local workspace.
+- Log your summary notes, key formulas, and code scripts in the **Study Notepad** tab.
+
+**Next Steps:**
+- Complete the day's study checklist.
+- Mark this day as completed in your roadmap calendar.
+- Review related terminology in the **Active Recall** flashcards.`;
+};
+
+window.renderMarkdownToHTMLString = function(markdownText) {
+  if (!markdownText) return "";
+  return markdownText
+    // Clean safe tags
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    // Headers
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    // Fenced Code Blocks (```code```)
+    .replace(/```([\s\S]*?)```/gim, '<pre class="code-block-wrapper"><code>$1</code></pre>')
+    // Inline Code (`code`)
+    .replace(/`([^`]+)`/gim, '<code class="inline-code">$1</code>')
+    // Bold
+    .replace(/\*\*([^\*]+)\*\*/gim, '<strong>$1</strong>')
+    // Alerts (GitHub Style)
+    .replace(/^&gt;\s*\[\!WARNING\](.*$)/gim, '<div class="alert-box alert-warning"><strong>⚠️ Warning:</strong>$1</div>')
+    .replace(/^&gt;\s*\[\!IMPORTANT\](.*$)/gim, '<div class="alert-box alert-important"><strong>💡 Important:</strong>$1</div>')
+    .replace(/^&gt;\s*\[\!NOTE\](.*$)/gim, '<div class="alert-box alert-note"><strong>ℹ️ Note:</strong>$1</div>')
+    // Bullets
+    .replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>')
+    .replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>')
+    // Double lines -> separate lists cleanup
+    .replace(/<\/ul>\s*<ul>/gim, '')
+    // Paragraph spaces
+    .replace(/\n\n/g, '<br><br>');
+};
