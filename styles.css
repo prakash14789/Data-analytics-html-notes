@@ -1136,6 +1136,28 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   width: 100%;
   min-width: 400px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Cell padding and borders */
+.lesson-table th,
+.lesson-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.4;
+}
+
+/* Header styling */
+.lesson-table th {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary, #f1f5f9);
+  font-weight: 600;
+}
+
+/* Row hover effect */
+.lesson-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /* Make bold inside table cells work */
