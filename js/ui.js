@@ -837,31 +837,121 @@ This lesson covers the core concept of **${dayTopic}**.
 };
 
 window.renderMarkdownToHTMLString = function(markdownText) {
-  if (!markdownText) return "";
+  if (!markdownText) return '';
+
+  // Helper: escape HTML entities safely
+  function escapeHTML(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── Step 1: Pre-process markdown TABLES ──────────────────────────────────
+  // Must run before general HTML escaping so pipe characters survive intact.
+  var lines = markdownText.split('\n');
+  var processedLines = [];
+  var i = 0;
+
+  while (i < lines.length) {
+    var line = lines[i];
+
+    // Detect a table block: line starts and ends with |
+    if (/^\s*\|.+\|/.test(line)) {
+      var tableLines = [];
+      while (i < lines.length && /^\s*\|.+\|/.test(lines[i])) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+
+      // Find the separator row (e.g. |---|---|) by index
+      var sepIdx = -1;
+      for (var j = 0; j < tableLines.length; j++) {
+        if (/^\s*\|[\s\-:|]+\|/.test(tableLines[j])) {
+          // confirm ALL cells are only dashes/colons/spaces
+          var cells0 = tableLines[j].split('|').slice(1, -1);
+          var isSep = cells0.every(function(c) { return /^[\s\-:]+$/.test(c); });
+          if (isSep) { sepIdx = j; break; }
+        }
+      }
+      if (sepIdx === -1) sepIdx = 1; // fallback: treat first row as header
+
+      var headerRows = tableLines.slice(0, sepIdx);
+      var bodyRows   = tableLines.slice(sepIdx + 1);
+
+      function getCells(row) {
+        return row.split('|').slice(1, -1).map(function(c) { return c.trim(); });
+      }
+
+      var tableHTML = '<table class="lesson-table">';
+
+      // thead
+      if (headerRows.length > 0) {
+        tableHTML += '<thead>';
+        headerRows.forEach(function(row) {
+          tableHTML += '<tr>';
+          getCells(row).forEach(function(c) {
+            tableHTML += '<th>' + escapeHTML(c) + '</th>';
+          });
+          tableHTML += '</tr>';
+        });
+        tableHTML += '</thead>';
+      }
+
+      // tbody
+      if (bodyRows.length > 0) {
+        tableHTML += '<tbody>';
+        bodyRows.forEach(function(row) {
+          tableHTML += '<tr>';
+          getCells(row).forEach(function(c) {
+            tableHTML += '<td>' + escapeHTML(c) + '</td>';
+          });
+          tableHTML += '</tr>';
+        });
+        tableHTML += '</tbody>';
+      }
+
+      tableHTML += '</table>';
+      processedLines.push(tableHTML);
+
+    } else {
+      processedLines.push(line);
+      i++;
+    }
+  }
+
+  // ── Step 2: Escape HTML in non-table lines ───────────────────────────────
+  var escapedLines = processedLines.map(function(ln) {
+    // Skip escaping any line that is already pre-built HTML (starts with < tag)
+    if (/^\s*<(table|div|thead|tbody|tr|th|td|ul|ol|li|pre|code|h[1-6]|hr|br|strong|em|span|p)\b/.test(ln)) return ln;
+    return ln.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  });
+
+  markdownText = escapedLines.join('\n');
+
+  // ── Step 3: Standard markdown → HTML pipeline ────────────────────────────
   return markdownText
-    // Clean safe tags
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    // Headers
+    // Headings
     .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // Fenced Code Blocks (```code```)
-    .replace(/```([\s\S]*?)```/gim, '<pre class="code-block-wrapper"><code>$1</code></pre>')
-    // Inline Code (`code`)
-    .replace(/`([^`]+)`/gim, '<code class="inline-code">$1</code>')
+    .replace(/^## (.*$)/gim,  '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim,   '<h1>$1</h1>')
+    // Fenced code blocks
+    .replace(/\x60\x60\x60([\s\S]*?)\x60\x60\x60/gim, '<pre class="code-block-wrapper"><code>$1</code></pre>')
+    // Inline code
+    .replace(/\x60([^\x60]+)\x60/gim, '<code class="inline-code">$1</code>')
     // Bold
     .replace(/\*\*([^\*]+)\*\*/gim, '<strong>$1</strong>')
-    // Alerts (GitHub Style)
-    .replace(/^&gt;\s*\[\!WARNING\](.*$)/gim, '<div class="alert-box alert-warning"><strong>⚠️ Warning:</strong>$1</div>')
-    .replace(/^&gt;\s*\[\!IMPORTANT\](.*$)/gim, '<div class="alert-box alert-important"><strong>💡 Important:</strong>$1</div>')
-    .replace(/^&gt;\s*\[\!NOTE\](.*$)/gim, '<div class="alert-box alert-note"><strong>ℹ️ Note:</strong>$1</div>')
-    // Bullets
+    // GitHub-style alerts
+    .replace(/^&gt;\s*\[!WARNING\](.*$)/gim,   '<div class="alert-box alert-warning"><strong>⚠️ Warning:</strong>$1</div>')
+    .replace(/^&gt;\s*\[!IMPORTANT\](.*$)/gim, '<div class="alert-box alert-important"><strong>💡 Important:</strong>$1</div>')
+    .replace(/^&gt;\s*\[!NOTE\](.*$)/gim,      '<div class="alert-box alert-note"><strong>ℹ️ Note:</strong>$1</div>')
+    // Bullet lists
     .replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>')
     .replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>')
-    // Double lines -> separate lists cleanup
     .replace(/<\/ul>\s*<ul>/gim, '')
-    // Paragraph spaces
+    // Horizontal rules
+    .replace(/^---$/gim, '<hr class="lesson-divider">')
+    // Paragraph spacing
     .replace(/\n\n/g, '<br><br>');
 };

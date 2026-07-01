@@ -1043,7 +1043,120 @@ h1, h2, h3, h4, h5, h6 {
   color: #a78bfa; /* violet hue for code formatting */
 }
 
-/* Alert Boxes for Markdown */
+/* ── Lesson Tables ─────────────────────────────────────────── */
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.lesson-table thead {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(16, 185, 129, 0.2));
+}
+
+.lesson-table thead th {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-primary, #7c3aed);
+  border-bottom: 2px solid rgba(124, 58, 237, 0.4);
+  white-space: nowrap;
+}
+
+.lesson-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.15s ease;
+}
+
+.lesson-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lesson-table tbody tr:hover {
+  background: rgba(124, 58, 237, 0.12);
+}
+
+.lesson-table td {
+  padding: 0.6rem 1rem;
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.lesson-table td:first-child,
+.lesson-table th:first-child {
+  border-left: 3px solid rgba(124, 58, 237, 0.5);
+}
+
+/* Horizontal Rule inside lessons */
+.lesson-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
+}
+
+/* Heading levels inside lesson content */
+.day-lesson-content h1,
+.drawer-lesson-body h1 {
+  font-size: 1.4rem;
+  color: var(--accent-primary, #7c3aed);
+  margin: 1.5rem 0 0.75rem;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+  padding-bottom: 0.4rem;
+}
+
+.day-lesson-content h2,
+.drawer-lesson-body h2 {
+  font-size: 1.15rem;
+  color: var(--text-primary, #f1f5f9);
+  margin: 1.25rem 0 0.5rem;
+}
+
+/* Responsive table scroll wrapper */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.25rem 0;
+  border-radius: 8px;
+}
+
+/* Ensure lesson-table inside drawer also applies */
+.drawer-lesson-body .lesson-table,
+.day-lesson-content .lesson-table {
+  margin: 0;
+  width: 100%;
+  min-width: 400px;
+}
+
+/* Make bold inside table cells work */
+.lesson-table th strong,
+.lesson-table td strong {
+  color: var(--text-primary, #f1f5f9);
+  font-weight: 600;
+}
+
+/* Code inside table cells */
+.lesson-table td code,
+.lesson-table th code {
+  background: rgba(255,255,255,0.07);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.82rem;
+  color: #a78bfa;
+}
+
+
 .alert-box {
   border-left: 4px solid;
   padding: 0.75rem 1rem;

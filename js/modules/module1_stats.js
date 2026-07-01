@@ -93,11 +93,7 @@ Mean = 103L (pulled up by the Rs 250L outlier!)
 
 **Why It Matters:**
 
-| Dataset | Mean | Median | Better? |
-|---|---|---|---|
-| Normal: 30K, 32K, 35K, 38K, 40K | 35K | 35K | Either |
-| With outlier: 30K, 32K, 35K, 38K, 5000K | 809K | 35K ✓ | **MEDIAN** |
-| Skewed house prices | High | Better ✓ | **MEDIAN** |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Dataset</th><th>Mean</th><th>Median</th><th>Better?</th></tr></thead><tbody><tr><td>Normal: 30K, 32K, 35K, 38K, 40K</td><td>35K</td><td>35K</td><td>Either</td></tr><tr><td>With outlier: 30K, 32K, 35K, 38K, 5000K</td><td>809K</td><td>35K ✓</td><td>**MEDIAN**</td></tr><tr><td>Skewed house prices</td><td>High</td><td>Better ✓</td><td>**MEDIAN**</td></tr></tbody></table></div>
 
 ---
 
@@ -142,13 +138,7 @@ Two classes, both with Mean = 70:
 
 ## Decision Guide: Which Metric?
 
-| Situation | Use This | Why? |
-|---|---|---|
-| Symmetric data, no outliers | **MEAN** | Represents the center perfectly |
-| Skewed data / extreme outliers | **MEDIAN** | Not pulled by outliers |
-| Categorical data (cities, colors) | **MODE** | Only metric for non-numeric data |
-| Comparing spread across groups | **SD** | Same units, intuitive interpretation |
-| Anomaly detection / thresholds | **Mean + 3×SD** | Flags values too far away |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Situation</th><th>Use This</th><th>Why?</th></tr></thead><tbody><tr><td>Symmetric data, no outliers</td><td>**MEAN**</td><td>Represents the center perfectly</td></tr><tr><td>Skewed data / extreme outliers</td><td>**MEDIAN**</td><td>Not pulled by outliers</td></tr><tr><td>Categorical data (cities, colors)</td><td>**MODE**</td><td>Only metric for non-numeric data</td></tr><tr><td>Comparing spread across groups</td><td>**SD**</td><td>Same units, intuitive interpretation</td></tr><tr><td>Anomaly detection / thresholds</td><td>**Mean + 3×SD**</td><td>Flags values too far away</td></tr></tbody></table></div>
 
 ---
 
@@ -196,21 +186,13 @@ At what amount would you flag as suspicious (>3 SD)?
 
 ## Real Data Analyst Examples
 
-| Scenario | What it means |
-|---|---|
-| Churn model says P = 0.15 | 15% chance customer will leave |
-| Fraud detector says P = 0.92 | 92% likely to be fraud — flag it! |
-| A/B test: P(click) = 0.35 | 35% of people who see this email will click |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Scenario</th><th>What it means</th></tr></thead><tbody><tr><td>Churn model says P = 0.15</td><td>15% chance customer will leave</td></tr><tr><td>Fraud detector says P = 0.92</td><td>92% likely to be fraud — flag it!</td></tr><tr><td>A/B test: P(click) = 0.35</td><td>35% of people who see this email will click</td></tr></tbody></table></div>
 
 ---
 
 ## The Three Rules of Probability
 
-| Rule | Formula | Example |
-|---|---|---|
-| P(A AND B) | P(A) × P(B) | Coin=Heads AND die=6 → 0.5 × 0.167 |
-| P(A OR B) | P(A) + P(B) | Die shows 1 OR 2 → 0.167 + 0.167 |
-| P(A given B) | Conditional | P(rain today given it rained yesterday) |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Rule</th><th>Formula</th><th>Example</th></tr></thead><tbody><tr><td>P(A AND B)</td><td>P(A) × P(B)</td><td>Coin=Heads AND die=6 → 0.5 × 0.167</td></tr><tr><td>P(A OR B)</td><td>P(A) + P(B)</td><td>Die shows 1 OR 2 → 0.167 + 0.167</td></tr><tr><td>P(A given B)</td><td>Conditional</td><td>P(rain today given it rained yesterday)</td></tr></tbody></table></div>
 
 **⚠️ Common Mistakes:**
 - "Tails is more likely after 5 heads in a row" → FALSE. Each flip is independent (50/50 always).
@@ -256,11 +238,7 @@ print(f"Probability of rolling a 6: {sixes / 100}")  # Should be ~0.1667
 
 ## The Most Important Rule: 68-95-99.7
 
-| Distance from Mean | % of Data | In Plain English |
-|---|---|---|
-| Within ±1 SD | **68%** | More than 2 out of 3 values |
-| Within ±2 SD | **95%** | Roughly 19 out of 20 values |
-| Within ±3 SD | **99.7%** | Almost everything — only 0.3% outside |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Distance from Mean</th><th>% of Data</th><th>In Plain English</th></tr></thead><tbody><tr><td>Within ±1 SD</td><td>**68%**</td><td>More than 2 out of 3 values</td></tr><tr><td>Within ±2 SD</td><td>**95%**</td><td>Roughly 19 out of 20 values</td></tr><tr><td>Within ±3 SD</td><td>**99.7%**</td><td>Almost everything — only 0.3% outside</td></tr></tbody></table></div>
 
 **Real Example — Daily Sales:** Mean = Rs 50,000, SD = Rs 5,000
 - 68% of days: Rs 45,000 → Rs 55,000
@@ -277,13 +255,7 @@ print(f"Probability of rolling a 6: {sixes / 100}")  # Should be ~0.1667
 **Example:** Sales mean = Rs 50,000, SD = Rs 5,000. A day with Rs 55,000:
 z = (55,000 − 50,000) / 5,000 = **1.0** → Exactly 1 SD above mean — totally normal.
 
-| Z-Score | Interpretation |
-|---|---|
-| z = 0 | Exactly average |
-| z = ±1 | Normal variation |
-| z = ±2 | Uncommon |
-| z = ±3 | Very rare! |
-| z > 3 | **Outlier! Investigate!** |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Z-Score</th><th>Interpretation</th></tr></thead><tbody><tr><td>z = 0</td><td>Exactly average</td></tr><tr><td>z = ±1</td><td>Normal variation</td></tr><tr><td>z = ±2</td><td>Uncommon</td></tr><tr><td>z = ±3</td><td>Very rare!</td></tr><tr><td>z &gt; 3</td><td>**Outlier! Investigate!**</td></tr></tbody></table></div>
 
 ---
 
@@ -361,11 +333,7 @@ Correlation is one of the most important concepts in data science. Every machine
 
 **Definition:** Covariance measures if two variables move in the same direction or opposite directions. It tells you **direction only** — not strength.
 
-| Scenario | Covariance | Real Example |
-|---|---|---|
-| **Positive** — both go up together | > 0 | Temperature ↑ → Ice cream sales ↑ |
-| **Negative** — one up, other down | < 0 | Temperature ↓ → Umbrella sales ↑ |
-| **Zero** — no pattern | ≈ 0 | Age vs. shoe size (independent) |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Scenario</th><th>Covariance</th><th>Real Example</th></tr></thead><tbody><tr><td>**Positive** — both go up together</td><td>&gt; 0</td><td>Temperature ↑ → Ice cream sales ↑</td></tr><tr><td>**Negative** — one up, other down</td><td>&lt; 0</td><td>Temperature ↓ → Umbrella sales ↑</td></tr><tr><td>**Zero** — no pattern</td><td>≈ 0</td><td>Age vs. shoe size (independent)</td></tr></tbody></table></div>
 
 **A dancing analogy:** Covariance tells you if they're moving in sync or not (direction). Correlation tells you *how well-rehearsed* the dance is (strength).
 
@@ -375,21 +343,13 @@ Correlation is one of the most important concepts in data science. Every machine
 
 **Example 1 — Marketing Spend vs. Revenue (Positive):**
 
-| Month | Ad Spend | Revenue |
-|---|---|---|
-| Month 1 | Rs 10K | Rs 100K |
-| Month 2 | Rs 15K | Rs 120K |
-| Month 3 | Rs 20K | Rs 140K |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Month</th><th>Ad Spend</th><th>Revenue</th></tr></thead><tbody><tr><td>Month 1</td><td>Rs 10K</td><td>Rs 100K</td></tr><tr><td>Month 2</td><td>Rs 15K</td><td>Rs 120K</td></tr><tr><td>Month 3</td><td>Rs 20K</td><td>Rs 140K</td></tr></tbody></table></div>
 
 Both increase together → Positive covariance
 
 **Example 2 — Price vs. Units Sold (Negative):**
 
-| Week | Price | Units Sold |
-|---|---|---|
-| Week 1 | Rs 100 | 500 |
-| Week 2 | Rs 150 | 300 |
-| Week 3 | Rs 200 | 100 |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Week</th><th>Price</th><th>Units Sold</th></tr></thead><tbody><tr><td>Week 1</td><td>Rs 100</td><td>500</td></tr><tr><td>Week 2</td><td>Rs 150</td><td>300</td></tr><tr><td>Week 3</td><td>Rs 200</td><td>100</td></tr></tbody></table></div>
 
 Price up, demand down → Negative covariance (classic demand curve!)
 
@@ -423,17 +383,7 @@ print(cov_matrix)
 
 **The Correlation Scale (Memorize This!):**
 
-| r value | Strength | Direction |
-|---|---|---|
-| +0.9 to +1.0 | Perfect / Very Strong | Positive |
-| +0.7 to +0.9 | **Strong** | Positive |
-| +0.5 to +0.7 | Moderate | Positive |
-| +0.3 to +0.5 | Weak | Positive |
-| 0 to +0.3 | Very Weak / None | — |
-| −0.3 to −0.5 | Weak | Negative |
-| −0.5 to −0.7 | Moderate | Negative |
-| −0.7 to −0.9 | **Strong** | Negative |
-| −1.0 | Perfect | Negative |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>r value</th><th>Strength</th><th>Direction</th></tr></thead><tbody><tr><td>+0.9 to +1.0</td><td>Perfect / Very Strong</td><td>Positive</td></tr><tr><td>+0.7 to +0.9</td><td>**Strong**</td><td>Positive</td></tr><tr><td>+0.5 to +0.7</td><td>Moderate</td><td>Positive</td></tr><tr><td>+0.3 to +0.5</td><td>Weak</td><td>Positive</td></tr><tr><td>0 to +0.3</td><td>Very Weak / None</td><td>—</td></tr><tr><td>−0.3 to −0.5</td><td>Weak</td><td>Negative</td></tr><tr><td>−0.5 to −0.7</td><td>Moderate</td><td>Negative</td></tr><tr><td>−0.7 to −0.9</td><td>**Strong**</td><td>Negative</td></tr><tr><td>−1.0</td><td>Perfect</td><td>Negative</td></tr></tbody></table></div>
 
 **⚠️ Key Insight:** r = −0.85 is STRONGER than r = +0.40! Strength = distance from zero, not positive or negative.
 
@@ -441,13 +391,7 @@ print(cov_matrix)
 
 ## Real-World Correlation Examples
 
-| Two Variables | Likely r | Why? |
-|---|---|---|
-| Study Hours vs. Exam Score | +0.85 | Strong positive |
-| Exercise Hours vs. Body Weight | −0.75 | Strong negative |
-| Temperature vs. Ice Cream Sales | +0.85 | Strong positive |
-| Temperature vs. Hot Drink Sales | −0.80 | Strong negative |
-| Shoe Size vs. Intelligence | +0.05 | Nearly zero — unrelated! |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Two Variables</th><th>Likely r</th><th>Why?</th></tr></thead><tbody><tr><td>Study Hours vs. Exam Score</td><td>+0.85</td><td>Strong positive</td></tr><tr><td>Exercise Hours vs. Body Weight</td><td>−0.75</td><td>Strong negative</td></tr><tr><td>Temperature vs. Ice Cream Sales</td><td>+0.85</td><td>Strong positive</td></tr><tr><td>Temperature vs. Hot Drink Sales</td><td>−0.80</td><td>Strong negative</td></tr><tr><td>Shoe Size vs. Intelligence</td><td>+0.05</td><td>Nearly zero — unrelated!</td></tr></tbody></table></div>
 
 ---
 
@@ -485,11 +429,7 @@ plt.show()
 
 **This is the #1 mistake people make in data analytics!**
 
-| Example | r | Hidden Cause |
-|---|---|---|
-| Ice Cream Sales vs. Drowning Deaths | +0.90 | Summer heat causes both |
-| Firefighters vs. Fire Damage | +0.92 | Bigger fires need more firefighters AND cause more damage |
-| Shoe Size vs. Reading Ability (kids) | +0.85 | Age — older kids have bigger feet AND read better |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Example</th><th>r</th><th>Hidden Cause</th></tr></thead><tbody><tr><td>Ice Cream Sales vs. Drowning Deaths</td><td>+0.90</td><td>Summer heat causes both</td></tr><tr><td>Firefighters vs. Fire Damage</td><td>+0.92</td><td>Bigger fires need more firefighters AND cause more damage</td></tr><tr><td>Shoe Size vs. Reading Ability (kids)</td><td>+0.85</td><td>Age — older kids have bigger feet AND read better</td></tr></tbody></table></div>
 
 Correlation can only tell you if two things move together. It CANNOT tell you WHY or whether one causes the other.
 
@@ -497,22 +437,13 @@ Correlation can only tell you if two things move together. It CANNOT tell you WH
 
 ## Correlation in Data Analytics Jobs
 
-| Task | How You Use Correlation |
-|---|---|
-| Feature Selection for ML | Keep high-corr features with target, drop near-zero ones |
-| Exploratory Data Analysis | Build correlation heatmaps first |
-| Business Reporting | "Revenue correlates 0.72 with marketing spend" |
-| Detecting Multicollinearity | Remove redundant features that are too similar |
-| Risk Assessment | Check if investments move together (diversification) |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Task</th><th>How You Use Correlation</th></tr></thead><tbody><tr><td>Feature Selection for ML</td><td>Keep high-corr features with target, drop near-zero ones</td></tr><tr><td>Exploratory Data Analysis</td><td>Build correlation heatmaps first</td></tr><tr><td>Business Reporting</td><td>&quot;Revenue correlates 0.72 with marketing spend&quot;</td></tr><tr><td>Detecting Multicollinearity</td><td>Remove redundant features that are too similar</td></tr><tr><td>Risk Assessment</td><td>Check if investments move together (diversification)</td></tr></tbody></table></div>
 
 ---
 
 ## Pearson vs. Spearman
 
-| Type | When to Use | Example |
-|---|---|---|
-| **Pearson (r)** | Continuous, roughly normal data | Height vs. Weight |
-| **Spearman (ρ)** | Ordinal data or skewed distributions | Movie ranking vs. IMDb rating |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Type</th><th>When to Use</th><th>Example</th></tr></thead><tbody><tr><td>**Pearson (r)**</td><td>Continuous, roughly normal data</td><td>Height vs. Weight</td></tr><tr><td>**Spearman (ρ)**</td><td>Ordinal data or skewed distributions</td><td>Movie ranking vs. IMDb rating</td></tr></tbody></table></div>
 
 \`\`\`python
 # Pearson (default)
@@ -568,12 +499,7 @@ Think of a criminal trial:
 
 **Alternative Hypothesis (H1):** What you're trying to prove — there IS an effect or difference.
 
-| Scenario | Null Hypothesis (H0) | Alternative Hypothesis (H1) |
-|---|---|---|
-| New button color | Conversion is the same for blue and green | Conversion is DIFFERENT between colors |
-| New drug trial | Drug has no effect on blood pressure | Drug CHANGES blood pressure |
-| Coin fairness | Coin is fair (50% heads) | Coin is NOT fair |
-| Salary by department | Salary is the same across departments | Salary DIFFERS across departments |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Scenario</th><th>Null Hypothesis (H0)</th><th>Alternative Hypothesis (H1)</th></tr></thead><tbody><tr><td>New button color</td><td>Conversion is the same for blue and green</td><td>Conversion is DIFFERENT between colors</td></tr><tr><td>New drug trial</td><td>Drug has no effect on blood pressure</td><td>Drug CHANGES blood pressure</td></tr><tr><td>Coin fairness</td><td>Coin is fair (50% heads)</td><td>Coin is NOT fair</td></tr><tr><td>Salary by department</td><td>Salary is the same across departments</td><td>Salary DIFFERS across departments</td></tr></tbody></table></div>
 
 **Key rule:** H0 always states equality or no effect. Write it before you look at the data!
 
@@ -593,12 +519,7 @@ Think of a criminal trial:
 
 ## The Decision Rule
 
-| P-Value | Interpretation | Decision (α = 0.05) |
-|---|---|---|
-| p < 0.01 | Very strong evidence against H0 | **Reject H0** — highly significant |
-| p < 0.05 | Strong evidence against H0 | **Reject H0** — statistically significant |
-| 0.05 ≤ p < 0.10 | Weak / borderline evidence | Fail to reject H0 |
-| p ≥ 0.10 | Little to no evidence | Fail to reject H0 |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>P-Value</th><th>Interpretation</th><th>Decision (α = 0.05)</th></tr></thead><tbody><tr><td>p &lt; 0.01</td><td>Very strong evidence against H0</td><td>**Reject H0** — highly significant</td></tr><tr><td>p &lt; 0.05</td><td>Strong evidence against H0</td><td>**Reject H0** — statistically significant</td></tr><tr><td>0.05 ≤ p &lt; 0.10</td><td>Weak / borderline evidence</td><td>Fail to reject H0</td></tr><tr><td>p ≥ 0.10</td><td>Little to no evidence</td><td>Fail to reject H0</td></tr></tbody></table></div>
 
 ---
 
@@ -606,11 +527,7 @@ Think of a criminal trial:
 
 Alpha is the threshold you choose **before** running the test. The most common choice is **α = 0.05**.
 
-| Alpha | When to Use |
-|---|---|
-| α = 0.01 | When false positives are costly — medical treatments, safety systems |
-| α = 0.05 | Standard industry/academic default |
-| α = 0.10 | Early-stage exploratory analysis |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Alpha</th><th>When to Use</th></tr></thead><tbody><tr><td>α = 0.01</td><td>When false positives are costly — medical treatments, safety systems</td></tr><tr><td>α = 0.05</td><td>Standard industry/academic default</td></tr><tr><td>α = 0.10</td><td>Early-stage exploratory analysis</td></tr></tbody></table></div>
 
 **⚠️ Critical Rule:** You MUST set alpha BEFORE seeing the data. If you adjust alpha after seeing the p-value, you've biased your experiment!
 
@@ -618,10 +535,7 @@ Alpha is the threshold you choose **before** running the test. The most common c
 
 ## PART 3: Type I & Type II Errors
 
-| | H0 Is Actually TRUE | H0 Is Actually FALSE |
-|---|---|---|
-| **You Reject H0** | **Type I Error (α)** — False Positive | ✓ Correct decision |
-| **You Fail to Reject H0** | ✓ Correct decision | **Type II Error (β)** — False Negative |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th></th><th>H0 Is Actually TRUE</th><th>H0 Is Actually FALSE</th></tr></thead><tbody><tr><td>**You Reject H0**</td><td>**Type I Error (α)** — False Positive</td><td>✓ Correct decision</td></tr><tr><td>**You Fail to Reject H0**</td><td>✓ Correct decision</td><td>**Type II Error (β)** — False Negative</td></tr></tbody></table></div>
 
 **Real-World Framing:**
 - **Type I Error (False Positive):** Spam filter marks an important email as spam. Shipping a redesign that made no real difference.
@@ -770,10 +684,7 @@ print(f"Minimum sample size per group: {math.ceil(n)}")
 
 ## PART 3: Type I & II Errors in A/B Testing Context
 
-| Error | What Happens | Business Consequence |
-|---|---|---|
-| **Type I (False Positive, α)** | Declare winner when there's no real difference | Ship a pointless redesign, waste engineer time |
-| **Type II (False Negative, β)** | Miss a genuine improvement | Leave money on the table; competitor ships it first |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Error</th><th>What Happens</th><th>Business Consequence</th></tr></thead><tbody><tr><td>**Type I (False Positive, α)**</td><td>Declare winner when there's no real difference</td><td>Ship a pointless redesign, waste engineer time</td></tr><tr><td>**Type II (False Negative, β)**</td><td>Miss a genuine improvement</td><td>Leave money on the table; competitor ships it first</td></tr></tbody></table></div>
 
 **Statistical Power (1 − β):** How likely are you to detect a real effect if one exists? Industry standard = **80%** minimum.
 
@@ -824,20 +735,7 @@ else:
 
 ## Week 1 Summary — Everything You Now Know
 
-| Concept | What It Does | When to Use |
-|---|---|---|
-| Mean / Median / Mode | Describe center of data | Start of any analysis |
-| Variance / SD | Describe spread of data | Always alongside mean |
-| 68-95-99.7 Rule | Detect anomalies | Fraud, quality control |
-| Probability | Quantify uncertainty | Models, predictions |
-| Normal Distribution | Pattern for real-world data | Before statistical tests |
-| Z-Score | Standardize data | Anomaly scoring, comparison |
-| Correlation | Relationship strength | Feature selection, EDA |
-| Hypothesis Testing | Separate signal from noise | Experiments, business decisions |
-| p-value | Measure of evidence against H0 | Every test you'll ever run |
-| Type I / II Errors | Know your risks | Experiment design |
-| Confidence Intervals | Range with certainty | Reporting any estimate |
-| A/B Testing | Controlled comparison | Product, marketing, growth |
+<div class="table-wrapper"><table class="lesson-table"><thead><tr><th>Concept</th><th>What It Does</th><th>When to Use</th></tr></thead><tbody><tr><td>Mean / Median / Mode</td><td>Describe center of data</td><td>Start of any analysis</td></tr><tr><td>Variance / SD</td><td>Describe spread of data</td><td>Always alongside mean</td></tr><tr><td>68-95-99.7 Rule</td><td>Detect anomalies</td><td>Fraud, quality control</td></tr><tr><td>Probability</td><td>Quantify uncertainty</td><td>Models, predictions</td></tr><tr><td>Normal Distribution</td><td>Pattern for real-world data</td><td>Before statistical tests</td></tr><tr><td>Z-Score</td><td>Standardize data</td><td>Anomaly scoring, comparison</td></tr><tr><td>Correlation</td><td>Relationship strength</td><td>Feature selection, EDA</td></tr><tr><td>Hypothesis Testing</td><td>Separate signal from noise</td><td>Experiments, business decisions</td></tr><tr><td>p-value</td><td>Measure of evidence against H0</td><td>Every test you'll ever run</td></tr><tr><td>Type I / II Errors</td><td>Know your risks</td><td>Experiment design</td></tr><tr><td>Confidence Intervals</td><td>Range with certainty</td><td>Reporting any estimate</td></tr><tr><td>A/B Testing</td><td>Controlled comparison</td><td>Product, marketing, growth</td></tr></tbody></table></div>
 
 ---
 
