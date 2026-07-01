@@ -1130,53 +1130,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 8px;
 }
 
-/* Ensure lesson-table inside drawer also applies */
-.drawer-lesson-body .lesson-table,
-.day-lesson-content .lesson-table {
-  margin: 0;
-  width: 100%;
-  min-width: 400px;
-  border-collapse: collapse;
-  text-align: left;
-}
 
-/* Cell padding and borders */
-.lesson-table th,
-.lesson-table td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  line-height: 1.4;
-}
-
-/* Header styling */
-.lesson-table th {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary, #f1f5f9);
-  font-weight: 600;
-}
-
-/* Row hover effect */
-.lesson-table tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-/* Make bold inside table cells work */
-.lesson-table th strong,
-.lesson-table td strong {
-  color: var(--text-primary, #f1f5f9);
-  font-weight: 600;
-}
-
-/* Code inside table cells */
-.lesson-table td code,
-.lesson-table th code {
-  background: rgba(255,255,255,0.07);
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px;
-  font-family: Consolas, Monaco, monospace;
-  font-size: 0.82rem;
-  color: #a78bfa;
-}
 
 
 .alert-box {
