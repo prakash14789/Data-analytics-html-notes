@@ -1043,58 +1043,52 @@ h1, h2, h3, h4, h5, h6 {
   color: #a78bfa; /* violet hue for code formatting */
 }
 
-/* ── Lesson Tables ─────────────────────────────────────────── */
+/* 📊 Lesson Tables 📊 */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 25px 0;
+}
+
 .lesson-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.25rem 0;
-  font-size: 0.875rem;
-  overflow-x: auto;
-  display: block;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  background: #111827;
 }
 
 .lesson-table thead {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(16, 185, 129, 0.2));
+  background: #4f46e5;
 }
 
-.lesson-table thead th {
-  padding: 0.7rem 1rem;
+.lesson-table th {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 18px;
   text-align: left;
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--accent-primary, #7c3aed);
-  border-bottom: 2px solid rgba(124, 58, 237, 0.4);
-  white-space: nowrap;
-}
-
-.lesson-table tbody tr {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  transition: background 0.15s ease;
-}
-
-.lesson-table tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.lesson-table tbody tr:hover {
-  background: rgba(124, 58, 237, 0.12);
 }
 
 .lesson-table td {
-  padding: 0.6rem 1rem;
-  color: var(--text-secondary, #94a3b8);
-  line-height: 1.5;
-  vertical-align: top;
+  padding: 14px 18px;
+  color: #d1d5db;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.lesson-table td:first-child,
-.lesson-table th:first-child {
-  border-left: 3px solid rgba(124, 58, 237, 0.5);
+.lesson-table tbody tr:nth-child(even) {
+  background: #1f2937;
+}
+
+.lesson-table tbody tr:hover {
+  background: #273449;
+  transition: 0.2s;
+}
+
+.lesson-table td:nth-child(2) {
+  font-weight: 700;
+  color: #ffffff;
 }
 
 /* Horizontal Rule inside lessons */
